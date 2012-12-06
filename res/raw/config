@@ -1,0 +1,23 @@
+
+#/* ---- CHECK THIS BEFORE PUBLISH!! -------------- */
+# - Check agreement is!
+# - Remove start prey preferences
+# - Update minor version here and in AndroidManifest.xml
+# - In case new version deploy, update @string/prey_version
+#
+# ask-for-password: Set to true in production
+# ------------------------------------------------- 
+
+#main config	
+ask-for-password=true
+prey-minor-version=35
+prey-subdomain=panel
+prey-domain=preyproject.com
+
+gcm-id-prefix=
+gcm-id=prey-c2dm@usefork.com
+c2dm-action=message
+c2dm-message-sync=sync
+
+#Analytics
+analytics-ua=UA-8743344-5
