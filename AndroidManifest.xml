@@ -57,6 +57,7 @@
     <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
     <uses-permission android:name="android.permission.CHANGE_NETWORK_STATE" />
     <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="android.permission.READ_CALL_LOG" />
     <!-- GCM requires a Google account. -->
 	<uses-permission android:name="android.permission.GET_ACCOUNTS" />
 
