@@ -12,14 +12,14 @@
 ask-for-password=true
 prey-minor-version=35
 prey-subdomain=panel
-prey-domain=preyproject.com
-#prey-domain=prey-geniass.dotcloud.com
+#prey-domain=preyproject.com
+prey-domain=prey-geniass.dotcloud.com
 
 gcm-id-prefix=
-gcm-id=prey-c2dm@usefork.com
-#gcm-id=242042234950
-c2dm-action=message
-#c2dm-action=data
+#gcm-id=prey-c2dm@usefork.com
+gcm-id=242042234950
+#c2dm-action=message
+c2dm-action=data
 c2dm-message-sync=sync
 
 #Analytics

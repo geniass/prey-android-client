@@ -475,8 +475,8 @@ public class PreyConfig {
 
 	public String getPreyUrl() {
 		String subdomain = FileConfigReader.getInstance(this.ctx).getPreySubdomain();
-		//return "https://".concat(getPreyDomain()).concat("/");
-		return "https://".concat(subdomain).concat(".").concat(getPreyDomain()).concat("/");
+		return "https://".concat(getPreyDomain()).concat("/");
+//		return "https://".concat(subdomain).concat(".").concat(getPreyDomain()).concat("/");
 	}
 
 	public boolean askForPassword() {
