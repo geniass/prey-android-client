@@ -47,9 +47,11 @@ public class ResponsesXMLHandler extends DefaultHandler {
 	 * <?xml version="1.0" encoding="UTF-8"?> <device> <status>
 	 * <missing>true</missing> <device_type>phone</device_type> </status>
 	 * <configuration> <delay>10</delay> <auto_update>false</auto_update>
-	 * </configuration> <modules> <module name="network" version="1.0"
-	 * active="true"/> <module name="session" version="1.0" active="true"/>
-	 * <module name="webcam" version="1.0" active="true"/> </modules> </device>
+	 * </configuration> <modules> 
+	 * <module name="network" version="1.0" active="true"/> 
+	 * <module name="session" version="1.0" active="true"/>
+	 * <module name="webcam" version="1.0" active="true"/> 
+	 * </modules> </device>
 	 * 
 	 * 
 	 * */

@@ -10,6 +10,7 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
+import android.util.Log;
 
 import com.prey.FileConfigReader;
 import com.prey.PreyConfig;
@@ -36,6 +37,7 @@ public class C2DMReceiver extends BroadcastReceiver {
 		String pushedMessage = intent.getExtras().getString(PreyConfig.getPreyConfig(context).getc2dmAction());
 	        if (pushedMessage != null) {
 	            PreyLogger.i("Push message received " + pushedMessage);
+	            Log.d("PUSH MESSAGE", pushedMessage);
 	            try {
 					PushMessage pMessage = new PushMessage(pushedMessage);
 					PreyConfig.getPreyConfig(context).setRunOnce(pMessage.getBody().indexOf("run_once") >= 0);

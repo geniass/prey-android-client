@@ -20,8 +20,8 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Build;
 import android.telephony.TelephonyManager;
+import android.util.Log;
 
-import com.google.android.apps.analytics.GoogleAnalyticsTracker;
 import com.prey.PreyAccountData;
 import com.prey.PreyConfig;
 import com.prey.PreyLogger;
@@ -78,6 +78,8 @@ public class PreyWebServices {
 			throw new PreyException(ctx.getText(R.string.error_communication_exception).toString(), e);
 		}
 		checkForError(xml);
+		
+		Log.d("USERS.xml RESPONSE", xml);
 
 		int from;
 		int to;
@@ -164,6 +166,8 @@ public class PreyWebServices {
 			throw new PreyException(ctx.getText(R.string.error_communication_exception).toString(), e);
 		}
 
+		Log.d("DEVICES.xml RESPONSE", response.getResponseAsString());
+		
 		return response.getResponseAsString();
 	}
 
@@ -174,6 +178,7 @@ public class PreyWebServices {
 		try {
 			xml = PreyRestHttpClient.getInstance(ctx).get(PreyConfig.getPreyConfig(ctx).getPreyUrl().concat("profile.xml"), parameters, preyConfig, email, password)
 					.getResponseAsString();
+			Log.d("PROFILE.xml RESPONSE", xml);
 		} catch (IOException e) {
 			PreyLogger.e("Error!",e);
 			throw new PreyException(ctx.getText(R.string.error_communication_exception).toString(), e);
@@ -194,6 +199,7 @@ public class PreyWebServices {
 			throw new PreyException(ctx.getText(R.string.error_cant_add_this_device).toString());
 		}
 
+		PreyLogger.d("Reg. new device");
 		String xmlDeviceId = this.registerNewDevice(ctx, apiKey, deviceType);
 
 		if (!xmlDeviceId.contains("<key"))
@@ -228,7 +234,6 @@ public class PreyWebServices {
 			PreyConfig.postUrl = null;
 			response = PreyRestHttpClient.getInstance(ctx).post(URL, parameters, preyConfig).getResponseAsString();
 			PreyLogger.d("Report sent: " + response);
-			GoogleAnalyticsTracker.getInstance().trackEvent("Report","Sent", "", 1);
 			if (preyConfig.isShouldNotify()) {
 				this.notifyUser(ctx);
 			}

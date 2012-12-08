@@ -35,6 +35,7 @@ import org.apache.http.protocol.HTTP;
 import org.apache.http.protocol.HttpContext;
 
 import android.content.Context;
+import android.util.Log;
 
 import com.prey.PreyConfig;
 import com.prey.PreyLogger;
@@ -98,6 +99,7 @@ public class PreyRestHttpClient {
 	public PreyHttpResponse methodAsParameter(String url, String methodAsString, Map<String, String> params, PreyConfig preyConfig, String user, String pass)
 			throws IOException {
 		HttpPost method = new HttpPost(url);
+		//method.setHeader("Content-type", "text/html");
 		params.put("_method", methodAsString);
 		method.setEntity(new UrlEncodedFormEntity(getHttpParamsFromMap(params), HTTP.UTF_8));
 		// method.setQueryString(getHttpParamsFromMap(params));
@@ -107,6 +109,7 @@ public class PreyRestHttpClient {
 
 	public PreyHttpResponse methodAsParameter(String url, String methodAsString, Map<String, String> params, PreyConfig preyConfig) throws IOException {
 		HttpPost method = new HttpPost(url);
+		//method.setHeader("Content-type", "text/html");
 		params.put("_method", methodAsString);
 		method.setEntity(new UrlEncodedFormEntity(getHttpParamsFromMap(params), HTTP.UTF_8));
 		// method.setQueryString(getHttpParamsFromMap(params));
@@ -117,6 +120,7 @@ public class PreyRestHttpClient {
 	public PreyHttpResponse put(String url, Map<String, String> params, PreyConfig preyConfig) throws IOException {
 		HttpPut method = new HttpPut(url);
 		method.setHeader("Accept", "application/xml,text/html,application/xhtml+xml;q=0.9,*/*;q=0.8");
+		//method.setHeader("Content-type", "text/html");
 		method.setEntity(new UrlEncodedFormEntity(getHttpParamsFromMap(params), HTTP.UTF_8));
 		// method.setParams(getHttpParamsFromMap(params));
 		PreyLogger.d("Sending using 'PUT' - URI: " + url + " - parameters: " + params.toString());
@@ -142,9 +146,19 @@ public class PreyRestHttpClient {
 	public PreyHttpResponse post(String url, Map<String, String> params, PreyConfig preyConfig) throws IOException {
 		HttpPost method = new HttpPost(url);
 		method.setHeader("Accept", "application/xml,text/html,application/xhtml+xml;q=0.9,*/*;q=0.8");
+		//method.setHeader("Content-type", "text/html");
 		method.setEntity(new UrlEncodedFormEntity(getHttpParamsFromMap(params), HTTP.UTF_8));
-
-		// method.setParams(getHttpParamsFromMap(params));
+		//Log.d("xml RESPONSE", Integer.toString(getHttpParamsFromMap(params).size()));
+		 //method.setParams(new BasicHttpParams().(params));
+		/*BasicHttpParams basic = new BasicHttpParams();
+		Iterator it = params.entrySet().iterator();
+	    while (it.hasNext()) {
+	        Map.Entry pairs = (Map.Entry)it.next();
+	        basic.setParameter((String)pairs.getKey(), pairs.getValue());
+	        it.remove(); // avoids a ConcurrentModificationException
+	    }
+	    method.setParams(basic);*/
+	    
 		PreyLogger.d("Sending using 'POST' - URI: " + url + " - parameters: " + params.toString());
 		httpclient.setRedirectHandler(new NotRedirectHandler());
 		HttpResponse httpResponse = httpclient.execute(method);
