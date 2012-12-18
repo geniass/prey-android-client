@@ -181,12 +181,12 @@ public class PreyWebServices {
 			Log.d("PROFILE.xml RESPONSE", xml);
 		} catch (IOException e) {
 			PreyLogger.e("Error!",e);
+			Log.d("PROFILE.xml ERROR!", e.getMessage());
 			throw new PreyException(ctx.getText(R.string.error_communication_exception).toString(), e);
 		}
 
 		if (!xml.contains("<key"))
 			throw new PreyException(ctx.getText(R.string.error_cant_add_this_device).toString());
-		//
 
 		int from;
 		int to;

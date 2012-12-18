@@ -100,7 +100,7 @@ public class PreyRestHttpClient {
 	public PreyHttpResponse methodAsParameter(String url, String methodAsString, Map<String, String> params, PreyConfig preyConfig, String user, String pass)
 			throws IOException {
 		HttpPost method = new HttpPost(url);
-		method.setHeader("Content-type", "text/plain");
+		//method.setHeader("Content-type", "text/plain");
 		params.put("_method", methodAsString);
 		method.setEntity(new UrlEncodedFormEntity(getHttpParamsFromMap(params), HTTP.UTF_8));
 		// method.setQueryString(getHttpParamsFromMap(params));
@@ -110,7 +110,7 @@ public class PreyRestHttpClient {
 
 	public PreyHttpResponse methodAsParameter(String url, String methodAsString, Map<String, String> params, PreyConfig preyConfig) throws IOException {
 		HttpPost method = new HttpPost(url);
-		method.setHeader("Content-type", "text/plain");
+		//method.setHeader("Content-type", "text/plain");
 		params.put("_method", methodAsString);
 		method.setEntity(new UrlEncodedFormEntity(getHttpParamsFromMap(params), HTTP.UTF_8));
 		// method.setQueryString(getHttpParamsFromMap(params));
@@ -121,7 +121,7 @@ public class PreyRestHttpClient {
 	public PreyHttpResponse put(String url, Map<String, String> params, PreyConfig preyConfig) throws IOException {
 		HttpPut method = new HttpPut(url);
 		method.setHeader("Accept", "application/xml,text/html,application/xhtml+xml;q=0.9,*/*;q=0.8");
-		method.setHeader("Content-type", "text/plain");
+		//method.setHeader("Content-type", "text/plain");
 		method.setEntity(new UrlEncodedFormEntity(getHttpParamsFromMap(params), HTTP.UTF_8));
 		// method.setParams(getHttpParamsFromMap(params));
 		PreyLogger.d("Sending using 'PUT' - URI: " + url + " - parameters: " + params.toString());
@@ -148,13 +148,14 @@ public class PreyRestHttpClient {
 		HttpPost method = new HttpPost(url);
 		method.setHeader("Accept", "application/xml,text/html,application/xhtml+xml;q=0.9,*/*;q=0.8");
 		//method.setHeader("Content-type", "text/plain");
-		//method.setEntity(new UrlEncodedFormEntity(getHttpParamsFromMap(params), HTTP.UTF_8));
-		String encoded = URLEncodedUtils.format(getHttpParamsFromMap(params), HTTP.UTF_8);
+		method.setEntity(new UrlEncodedFormEntity(getHttpParamsFromMap(params), HTTP.UTF_8));
+		
+		/*String encoded = URLEncodedUtils.format(getHttpParamsFromMap(params), HTTP.UTF_8);
 		encoded = encoded.replaceAll("\\+", "%20");
 		Log.d("POST DATA", encoded);
 		StringEntity entity = new StringEntity(encoded, HTTP.UTF_8);
 		entity.setContentType("text/plain");
-		method.setEntity(entity);
+		method.setEntity(entity);*/
 
 		//Log.d("xml RESPONSE", Integer.toString(getHttpParamsFromMap(params).size()));
 		 //method.setParams(new BasicHttpParams().(params));
@@ -201,7 +202,9 @@ public class PreyRestHttpClient {
 		HttpDelete method = new HttpDelete(url + URLEncodedUtils.format(getHttpParamsFromMap(params), "UTF-8"));
 		method.setHeader("Accept", "application/xml,text/html,application/xhtml+xml;q=0.9,*/*;q=0.8");
 		method.addHeader("Authorization", "Basic " + getCredentials(preyConfig.getApiKey(), "X"));
-		PreyLogger.d("Sending using 'DELETE' (Basic Authentication) - URI: " + url + " - parameters: " + params.toString());
+		method.addHeader("Content-Length", Integer.toString(params.size()));
+		PreyLogger.d("Sending using 'DELETE' (Basic Authentication) - URI: " + url + " - parameters: " + params.toString() + "Param size: " + params.size());
+		
 		HttpResponse httpResponse = httpclient.execute(method);
 		PreyHttpResponse response = new PreyHttpResponse(httpResponse);
 		PreyLogger.d("Response from server: " + response.toString());
